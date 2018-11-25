@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1540833486 source:c:\users\matt_\documents\piscine c\linter\functions.c
+	"header.h"
+
+1539358589 c:\users\matt_\documents\piscine c\linter\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"prototypes.h"
+	"structure.h"
+
+1540833388 c:\users\matt_\documents\piscine c\linter\prototypes.h
+
+1539361578 c:\users\matt_\documents\piscine c\linter\structure.h
+
+1540832506 source:c:\users\matt_\documents\piscine c\linter\main.c
+	"header.h"
+
+1540832506 source:c:\users\matt_\onedrive\documents\linter\main.c
+	"header.h"
+
+1539358589 c:\users\matt_\onedrive\documents\linter\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"prototypes.h"
+	"structure.h"
+
+1540833388 c:\users\matt_\onedrive\documents\linter\prototypes.h
+
+1539361578 c:\users\matt_\onedrive\documents\linter\structure.h
+
