@@ -120,11 +120,34 @@ int max_line_numbers(int n, char * test){
             free(string);
             return 1;
         }
-
-
     }
-
     free(string);
+    return 0;
+}
+
+
+int comma_spacing(char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char c;
+    do {
+        c = fgetc(file);
+        if(feof(file)){
+            break;
+        }
+        printf("%c\n", c);
+        if(c == ','){
+            c = fgetc(file);
+            if(c != ' '){
+                return 1;
+            }
+        }
+    }while(c);
 
     return 0;
 }

@@ -49,3 +49,22 @@
 1543440229 source:c:\users\matt_\documents\projetc\linter\linterc\linter\functions.c
 	"header.h"
 
+1543445191 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\main.c
+	"header.h"
+
+1543442213 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"prototypes.h"
+	"structure.h"
+
+1543444856 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\prototypes.h
+
+1543442213 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\structure.h
+
+1543442213 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\utilitaries.c
+
+1543445297 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\functions.c
+	"header.h"
+

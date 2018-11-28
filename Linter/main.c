@@ -17,22 +17,13 @@ int main(int argc, char** argv){
 
     fclose(defaultConfFile);
 
-    int error = max_line_numbers(80, "main.c");
+    int space = comma_spacing("main.c");
 
-    if(error){
-        printf("Une ligne depasse la longueur autorisee ");
+    if(space){
+        printf("Il manque un espace apres une virgule");
     }else{
         printf("Fichier OK");
     }
 
-
-
-
     return 0;
 }
-
-//
-//
-
-
-
