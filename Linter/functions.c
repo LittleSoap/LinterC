@@ -72,3 +72,59 @@ char* readConfFile(FILE * defaultFile, char* LineRead){
     return LineRead;
 
 }
+
+int max_file_line_number(int n, char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+
+    int counter = 0;
+    char * string = malloc(sizeof(char)*255);
+
+    while (fgets(string, 255, file)){
+        printf("counter = %d\n", counter);
+        counter++;
+    }
+
+    free(string);
+
+    if(counter >= n){
+        return 1;
+    }else{
+        return 0;
+    }
+
+}
+
+
+int max_line_numbers(int n, char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+
+    int counter = 0;
+    char * string = malloc(sizeof(char)*255);
+
+    while (fgets(string, 255, file)){
+
+        if((strlen(string) -1) > n ){
+            printf("lenght : %d\n", strlen(string));
+            free(string);
+            return 1;
+        }
+
+
+    }
+
+    free(string);
+
+    return 0;
+}

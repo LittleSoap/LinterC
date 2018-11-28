@@ -30,3 +30,22 @@
 
 1539361578 c:\users\matt_\onedrive\documents\linter\structure.h
 
+1543440156 source:c:\users\matt_\documents\projetc\linter\linterc\linter\main.c
+	"header.h"
+
+1543264611 c:\users\matt_\documents\projetc\linter\linterc\linter\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"prototypes.h"
+	"structure.h"
+
+1543439827 c:\users\matt_\documents\projetc\linter\linterc\linter\prototypes.h
+
+1543433882 c:\users\matt_\documents\projetc\linter\linterc\linter\structure.h
+
+1543264611 source:c:\users\matt_\documents\projetc\linter\linterc\linter\utilitaries.c
+
+1543440229 source:c:\users\matt_\documents\projetc\linter\linterc\linter\functions.c
+	"header.h"
+
