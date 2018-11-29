@@ -110,7 +110,6 @@ int max_line_numbers(int n, char * test){
         return -1;
     }
 
-    int counter = 0;
     char * string = malloc(sizeof(char)*255);
 
     while (fgets(string, 255, file)){
@@ -148,6 +147,40 @@ int comma_spacing(char * test){
             }
         }
     }while(c);
+
+    return 0;
+}
+
+
+int array_bracket_eol(char *test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char * string = malloc(sizeof(char) * 255);
+
+    do {
+
+        fgets(string, 255, file);
+
+        for(int i = 0; i<(strlen(string)) -1; i++){
+
+            if(string[i] == '{'){
+
+                    if(string[i-1] != ')' && string[i-1] != '\n'){
+                        printf("%c", string[i-1]);
+                        return 1;
+                    }
+
+            }
+
+        }
+
+
+    }while(!feof(file));
 
     return 0;
 }
