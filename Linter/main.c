@@ -3,7 +3,6 @@
 
 int main(int argc, char** argv){
 
-    int line = 0;
 
     FILE* defaultConfFile;
     defaultConfFile = openConfFile();
@@ -17,13 +16,9 @@ int main(int argc, char** argv){
 
     fclose(defaultConfFile);
 
-    int space = comma_spacing("main.c");
+    int error = array_bracket_eol("main.c");
 
-    if(space){
-        printf("Il manque un espace apres une virgule");
-    }else{
-        printf("Fichier OK");
-    }
+    printf("\n%d", error);
 
     return 0;
 }
