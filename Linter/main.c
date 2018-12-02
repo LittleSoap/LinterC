@@ -16,9 +16,9 @@ int main(int argc, char** argv){
 
     fclose(defaultConfFile);
 
-    int error = array_bracket_eol("main.c");
+    int error = indent(4, "main.c");
 
-    printf("\n%d", error);
+    printf("\n%d\n", error);
 
     return 0;
 }
