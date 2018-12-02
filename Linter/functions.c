@@ -165,12 +165,12 @@ int array_bracket_eol(char *test){
     do {
 
         fgets(string, 255, file);
-
-        for(int i = 0; i<(strlen(string)) -1; i++){
+        int i;
+        for(i = 0; i<(strlen(string)-1); i++){
 
             if(string[i] == '{'){
 
-                    if(string[i-1] != ')' && string[i-1] != '\n'){
+                    if(string[i-1] != ')' && string[i-1] != '\n' && (string[i-1] != 'o')){
                         printf("%c", string[i-1]);
                         return 1;
                     }
@@ -184,3 +184,35 @@ int array_bracket_eol(char *test){
 
     return 0;
 }
+
+int indent(int n, char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char * string = malloc(sizeof(char) * 255);
+
+    do {
+        fgets(string, 255, file);
+        int i=0;
+
+        while(string[i] == ' '){
+            i++;
+        }
+        if((i%n) != 0){
+            return 1;
+        }
+
+    }while(!feof(file));
+
+    return 0;
+
+}
+
+
+
+
+
