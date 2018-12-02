@@ -1,24 +1,19 @@
 #include "header.h"
 
 
-int main(int argc, char** argv){
+int main(int argc, char * * argv){
 
 
-    FILE* defaultConfFile;
-    defaultConfFile = openConfFile();
+    int error = operators_spacing("test.txt");
 
-    if(defaultConfFile == NULL){
-        printf("Erreur Conf\n");
-        return -1;
+    if(error == 1){
+        printf("error");
+    }else if(error == 0){
+        printf("pas d'erreur");
     }
 
-    //writeConfFile(defaultConfFile);
+    int a = 1;
 
-    fclose(defaultConfFile);
-
-    int error = indent(4, "main.c");
-
-    printf("\n%d\n", error);
 
     return 0;
 }

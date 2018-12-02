@@ -1,77 +1,5 @@
 #include "header.h"
-FILE* openConfFile(){
 
-    FILE* defaultFile = fopen(DEFAULT_CONF,"r");
-
-    if(defaultFile != NULL){
-        //On lit le fichier
-        printf("Lecture fichier\n");
-        char* LineRead = NULL;
-
-        LineRead = readConfFile(defaultFile, LineRead );
-        printf("%s", LineRead);
-
-        return defaultFile;
-
-    }else{
-
-        //On crée le fichier //createConfFile
-        //On initialise le fichier avec des valeurs par defaut
-        if((defaultFile = createConfFile()) != NULL){
-            printf("Fichier cree\n");
-            return defaultFile;
-        }else{
-            printf("Impossible de creer le fichier\n");
-            return NULL;
-        }
-
-    }
-
-}
-
-FILE* createConfFile(){
-
-    FILE * defaultFile = fopen(DEFAULT_CONF,"w");
-
-    if(defaultFile == NULL){
-        return NULL;
-    }else{
-        return defaultFile;
-    }
-
-}
-
-int writeConfFile(FILE* defaultConfFile){
-
-    if(defaultConfFile == NULL){
-
-        printf("Impossible d'écrire dans le fichier de conf\n");
-        return 0;
-
-    }
-
-    //On ecrit les valeurs par défaut dans le fichier de conf
-    fprintf(defaultConfFile, "%s","=extends\n\n");
-    fprintf(defaultConfFile, "%s","=rules\n\n");
-    fprintf(defaultConfFile, "%s","=excludedFiles\n\n");
-    fprintf(defaultConfFile, "%s","=recursive\ntrue");
-    return 1;
-}
-
-
-char* readConfFile(FILE * defaultFile, char* LineRead){
-
-    LineRead = malloc(sizeof(char)* 255);
-
-    if(defaultFile == NULL){
-        return NULL;
-    }
-
-    fgets(LineRead, 255, defaultFile);
-
-    return LineRead;
-
-}
 
 int max_file_line_number(int n, char * test){
 
@@ -166,7 +94,8 @@ int array_bracket_eol(char *test){
 
         fgets(string, 255, file);
         int i;
-        for(i = 0; i<(strlen(string)-1); i++){
+        for(i = 0; i<(strlen(string)-1); i++)
+        {
 
             if(string[i] == '{'){
 
@@ -212,7 +141,337 @@ int indent(int n, char * test){
 
 }
 
+int operators_spacing(char * test){
+
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char * string = malloc(sizeof(char) * 255);
+
+    do {
+
+        fgets(string, 255, file);
+        int i;
+
+        for(i = 0; i<(strlen(string)-1); i++)
+        {
+
+            switch(string[i]){
+
+                case '+':
+
+                    //Case ++
+                    if(string[i-1] == '+'){
+
+                        if(string[i+1] != ' ' || string[i-2] != ' '){
+                            return 0;
+                        }
+
+                    }
+
+                    //Case ++
+                    else if(string[i+1] == '+'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case +=
+                    else if(string[i+1] == '='){
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
 
 
 
+                break;
 
+                case '-' :
+
+                    //Case --
+                    if(string[i-1] == '-'){
+
+                        if(string[i+1] != ' ' || string[i-2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case --
+                    else if(string[i+1] == '-'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case -=
+                    else if(string[i+1] == '='){
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+
+
+                break;
+
+                case '*' :
+
+                    //case *=
+                    if(string[i+1] == '='){
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '/':
+
+                    //case /=
+                    if(string[i+1] == '='){
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '%':
+
+                    //case %=
+                    if(string[i+1] == '='){
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '=' :
+
+                    //Case affectation and comparison
+                    if(string[i-1] == '+' || string[i-1] == '-' || string[i-1] == '*' || string[i-1] == '/' || string[i-1] == '%' || string[i-1] == '<' || string[i-1] == '>' || string[i-1] == '!'){
+                        if(string[i-2] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    //Case ==
+                    else if(string[i-1] == '='){
+
+                        if(string[i+1] != ' ' || string[i-2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case ==
+                    else if(string[i+1] == '='){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '<' :
+
+                    //Case <<
+                    if(string[i+1] == '<'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    //Case <<
+                    else if(string[i-1] == '<'){
+
+                        if(string[i-2] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    //Case <=
+                    if(string[i+1] == '='){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '>' :
+
+                    //Case >>
+                    if(string[i+1] == '>'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    //Case >>
+                    else if(string[i-1] == '>'){
+
+                        if(string[i-2] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+                    }
+
+
+                    //Case >=
+                    else if(string[i+1] == '='){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '!' :
+
+                    //Case !=
+                    if(string[i+1] == '='){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+                    }
+
+                    else{
+
+                        if(string[i-1] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+
+                case '&':
+
+                    //Case &&
+                    if(string[i-1] == '&'){
+
+                        if(string[i-2] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case &&
+                    if(string[i+1] == '&'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+
+                case '|':
+
+                    //Case ||
+                    if(string[i-1] == '|'){
+
+                        if(string[i-2] != ' ' || string[i+1] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                    //Case ||
+                    if(string[i+1] == '|'){
+
+                        if(string[i-1] != ' ' || string[i+2] != ' '){
+                            return 1;
+                        }
+
+                    }
+
+                break;
+            }
+
+        }
+
+
+    }while(!feof(file));
+
+    return 0;
+
+}
