@@ -1,6 +1,7 @@
 =extends
 blop.lconf
-main.conf
+main.lconf
+tamer.lconf
 
 =excludedFiles
 - toto.c

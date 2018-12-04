@@ -14,4 +14,6 @@ int indent(int n, char * test);
 
 
 //Utilitaries
-void printArray2D(char ** tab);
+void printArray2D(char ** tab, int counter);
+void freeArray2D(char ** tab);
+char * my_flush(char * test);

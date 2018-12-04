@@ -1,17 +1,34 @@
 #include "header.h"
-void printArray2D(char ** tab){
 
-       /* printf("%d", strlen(tab) -1);
+char * my_flush(char * test){
 
-        for(int i=0; i< (strlen(tab) -1) ; i++){
+    for(int i =0; i<(strlen(test)-1); i++){
+        if(test[i] == '\n'){
+            test[i] = '\0';
+        }
+    }
 
-            for(int j=0; j< (strlen(*tab) -1); j++){
-                printf("%c", tab[i][j]);
-            }
+    return test;
 
+}
 
-            printf("\n");
-        }*/
+void printArray2D(char ** tab, int counter){
+
+        for(int i=0; i< counter ; i++){
+
+            printf("%s\n", tab[i]);
+
+        }
+}
+
+void freeArray2D(char ** tab){
+
+    for(int i =0; i< sizeof(tab); i++){
+
+        free(tab[i]);
+    }
+    free(tab);
+
 }
 
 
