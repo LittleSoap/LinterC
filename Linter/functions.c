@@ -141,6 +141,37 @@ int indent(int n, char * test){
 
 }
 
+int comments_header(char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char * string = malloc(sizeof(char) * 255);
+    int i;
+    char c;
+
+    c = fgetc(file);
+    if(c == '/'){
+        c = fgetc(file);
+        if(c == '*'){
+            while(!feof(file)){
+                c = fgetc(file);
+                if(c == '*' && ((c = fgetc(file)) == '/')){
+                    return 0;
+                }
+            }
+            return 1;
+        }else{
+            return 1;
+        }
+    }else{
+        return 1;
+    }
+}
+
 int operators_spacing(char * test){
 
 
