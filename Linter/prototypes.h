@@ -11,6 +11,7 @@ int comma_spacing(char * test);
 int array_bracket_eol(char *test);
 int operators_spacing(char * test);
 int indent(int n, char * test);
+int comments_header(char * test);
 
 
 //Utilitaries

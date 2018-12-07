@@ -50,25 +50,29 @@
 1543773292 source:c:\users\matt_\documents\projetc\linter\linterc\linter\functions.c
 	"header.h"
 
-1543445191 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\main.c
+1544219959 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\main.c
 	"header.h"
 
-1543442213 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\header.h
+1544216909 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\header.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"prototypes.h"
 	"structure.h"
 
-1543756618 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\prototypes.h
+1544219927 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\prototypes.h
 
-1543442213 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\structure.h
+1544216922 c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\structure.h
 
-1543442213 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\utilitaries.c
+1544220003 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\utilitaries.c
+	"header.h"
 
-1543756662 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\functions.c
+1544219927 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\functions.c
 	"header.h"
 
 1543964569 source:c:\users\matt_\documents\projetc\linter\linterc\linter\conf.c
+	"header.h"
+
+1544216922 source:c:\users\steph\desktop\esgi\3ème année 2018-2019\linterc\linter\conf.c
 	"header.h"
 
