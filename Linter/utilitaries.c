@@ -15,21 +15,9 @@ char * my_flush(char * test){
 
 void printArray2D(char ** tab, int counter){
         int i;
-        for(i=0; i< counter ; i++){
-
+        for(i=0; i< counter; i++){
             printf("%s\n", tab[i]);
-
         }
-}
-
-void freeArray2D(char ** tab){
-    int i;
-    for(i =0; i< sizeof(tab); i++){
-
-        free(tab[i]);
-    }
-    free(tab);
-
 }
 
 

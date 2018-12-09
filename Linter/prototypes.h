@@ -2,7 +2,9 @@
 
 //Part 1
 void openConfFile();
-void readConfFile(FILE * defaultFile);
+int readConfFile(FILE * defaultFile);
+void read_function_parameters (int ** rules, char * LineRead, int index);
+
 
 //Functions part 2
 int max_file_line_number(int n, char* test);
@@ -13,8 +15,10 @@ int operators_spacing(char * test);
 int indent(int n, char * test);
 int comments_header(char * test);
 
+//Functions part 3
+int no_multi_declaration(char * test);
 
 //Utilitaries
 void printArray2D(char ** tab, int counter);
-void freeArray2D(char ** tab);
 char * my_flush(char * test);
+

@@ -1,14 +1,11 @@
-#include "header.h"
+/* test
 
+*/
+#include "header.h"
 
 int main(int argc, char ** argv){
 
 
-    //openConfFile();
-
-    FILE* file = fopen("main.c", "r");
-    int error = comments_header(file);
-    printf("%d" , error);
-
+    openConfFile();
     return 0;
 }
