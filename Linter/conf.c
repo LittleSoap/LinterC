@@ -19,7 +19,7 @@ void openConfFile(){
 void readConfFile(FILE * defaultFile){
 
     char ** extend;
-    int ** rules;
+    int ** rules = malloc(sizeof(int) * 255);
     //int is_recursive;
     //char ** excluded_files;
     char * LineRead;
