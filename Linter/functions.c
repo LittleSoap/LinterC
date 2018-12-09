@@ -1,9 +1,9 @@
 #include "header.h"
 
 
-int max_file_line_number(int n, char * test){
+int max_file_line_number(int n, char * file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -29,9 +29,9 @@ int max_file_line_number(int n, char * test){
 }
 
 
-int max_line_numbers(int n, char * test){
+int max_line_numbers(int n, char * file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -53,9 +53,9 @@ int max_line_numbers(int n, char * test){
 }
 
 
-int comma_spacing(char * test){
+int comma_spacing(char * file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -80,9 +80,9 @@ int comma_spacing(char * test){
 }
 
 
-int array_bracket_eol(char *test){
+int array_bracket_eol(char *file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -114,9 +114,9 @@ int array_bracket_eol(char *test){
     return 0;
 }
 
-int indent(int n, char * test){
+int indent(int n, char * file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -141,16 +141,15 @@ int indent(int n, char * test){
 
 }
 
-int comments_header(char * test){
+int comments_header(char * file_function){
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
         return -1;
     }
-    char * string = malloc(sizeof(char) * 255);
-    int i;
+
     char c;
 
     c = fgetc(file);
@@ -172,10 +171,10 @@ int comments_header(char * test){
     }
 }
 
-int operators_spacing(char * test){
+int operators_spacing(char * file_function){
 
 
-    FILE* file = fopen(test, "r");
+    FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
         printf("Impossible d'ouvrir le fichier");
@@ -504,5 +503,235 @@ int operators_spacing(char * test){
     }while(!feof(file));
 
     return 0;
+
+}
+
+int no_multi_declaration(char * file_function){
+
+    FILE* file = fopen(file_function, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+    char c;
+
+    c = fgetc(file);
+    while(!feof(file)){
+        if(c != '('){
+            //int
+            if(c == 'i'){
+                c = fgetc(file);
+                if(c == 'n'){
+                    c = fgetc(file);
+                    if(c == 't'){
+                        c = fgetc(file);
+                        while(c != ';' || c == '{'){
+                            if(c == '('){
+                                break;
+                            }else if(c == ','){
+                                return 1;
+                            }else{
+                                c = fgetc(file);
+                            }
+                        }
+                    }
+                }
+            }
+            //char
+            if(c == 'c'){
+                c = fgetc(file);
+                if(c == 'h'){
+                    c = fgetc(file);
+                    if(c == 'a'){
+                        c = fgetc(file);
+                        if(c == 'r'){
+                            c = fgetc(file);
+                            while(c != ';' || c == '{'){
+                                if(c == '('){
+                                    break;
+                                }else if(c == ','){
+                                    return 1;
+                                }else{
+                                    c = fgetc(file);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //float
+            if(c == 'f'){
+                c = fgetc(file);
+                if(c == 'l'){
+                    c = fgetc(file);
+                    if(c == 'o'){
+                        c = fgetc(file);
+                        if(c == 'a'){
+                            c = fgetc(file);
+                            if(c == 't'){
+                                c = fgetc(file);
+                                while(c != ';' || c == '{'){
+                                    if(c == '('){
+                                        break;
+                                    }else if(c == ','){
+                                        return 1;
+                                    }else{
+                                        c = fgetc(file);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //double
+            if(c == 'd'){
+                c = fgetc(file);
+                if(c == 'o'){
+                    c = fgetc(file);
+                    if(c == 'u'){
+                        c = fgetc(file);
+                        if(c == 'b'){
+                            c = fgetc(file);
+                            if(c == 'l'){
+                                c = fgetc(file);
+                                if(c == 'e'){
+                                    c = fgetc(file);
+                                    while(c != ';' || c == '{'){
+                                        if(c == '('){
+                                            break;
+                                        }else if(c == ','){
+                                            return 1;
+                                        }else{
+                                            c = fgetc(file);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //short
+            if(c == 's'){
+                c = fgetc(file);
+                if(c == 'h'){
+                    c = fgetc(file);
+                    if(c == 'o'){
+                        c = fgetc(file);
+                        if(c == 'r'){
+                            c = fgetc(file);
+                            if(c == 't'){
+                                c = fgetc(file);
+                                while(c != ';' || c == '{'){
+                                    if(c == '('){
+                                        break;
+                                    }else if(c == ','){
+                                        return 1;
+                                    }else{
+                                        c = fgetc(file);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //unsigned
+            if(c == 'u'){
+                c = fgetc(file);
+                if(c == 'n'){
+                    c = fgetc(file);
+                    if(c == 's'){
+                        c = fgetc(file);
+                        if(c == 'i'){
+                            c = fgetc(file);
+                            if(c == 'g'){
+                                c = fgetc(file);
+                                if(c == 'n'){
+                                    c = fgetc(file);
+                                    if(c == 'e'){
+                                        c = fgetc(file);
+                                        if(c == 'd'){
+                                            c = fgetc(file);
+                                            while(c != ';' || c == '{'){
+                                                if(c == '('){
+                                                    break;
+                                                }else if(c == ','){
+                                                    return 1;
+                                                }else{
+                                                    c = fgetc(file);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //long
+            if(c == 'l'){
+                c = fgetc(file);
+                if(c == 'o'){
+                    c = fgetc(file);
+                    if(c == 'n'){
+                        c = fgetc(file);
+                        if(c == 'g'){
+                            c = fgetc(file);
+                            while(c != ';' || c == '{'){
+                                if(c == '('){
+                                    break;
+                                }else if(c == ','){
+                                    return 1;
+                                }else{
+                                    c = fgetc(file);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            c = fgetc(file);
+        }
+    }
+    return 0;
+
+}
+
+void read_function_parameters (int ** rules, char * LineRead, int index ){
+
+    int i = 0;
+
+    rules[index] = malloc(sizeof(int));
+    char * substring = malloc(sizeof(char) * 255);
+
+    int l;
+    for (l=0; l< (strlen(LineRead) -1); l++){
+
+        if(LineRead[l] == '=' && LineRead[l+1] == ' '){
+            l+= 2;
+            do{
+                substring[i] = LineRead[l];
+                i++;
+                l++;
+            }while(LineRead[l] != '\n' );
+
+            substring[i] = '\0';
+        }
+
+    }
+
+    if((strcmp(substring, "off")) == 0){
+        rules[index][0] = 0;
+    }else if((strcmp(substring, "on")) == 0){
+        rules[index][0] = 1;
+    }else{
+        rules[index][0] = atoi(substring);
+    }
+
+    free(substring);
 
 }
