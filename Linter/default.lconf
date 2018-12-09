@@ -4,27 +4,27 @@ main.lconf
 tamer.lconf
 
 =excludedFiles
-- toto.c
+toto.c
+test.c
+test2.c
 
 =rules
-- array_bracket_eol = on/off
-- operators_spacing = on/off
-- comma_spacing = on/off
-- indent = n/off
-- comments_header = on/off
-- max_line_numbers = n/off
-- max_file_line_number = n/off
-- no_trailing_spaces = on/off
-- no_multi_declaration = on/off
-- unused_variable = on/off
-- undeclared_variable = on/off
-- no_prototype = on/off
-- unused_function = on/off
-- undeclared_function = on/off
-- variable_assignment_type = on/off
-- function_parameters_type = on/off
-
-
+- array_bracket_eol = on
+- operators_spacing = on
+- comma_spacing = off
+- indent = off
+- comments_header = off
+- max_line_numbers = 100
+- max_file_line_number = 50
+- no_trailing_spaces = on
+- no_multi_declaration = off
+- unused_variable = off
+- undeclared_variable = off
+- no_prototype = off
+- unused_function = on
+- undeclared_function = on
+- variable_assignment_type = off
+- function_parameters_type = on
 
 =recursive
-true
+f

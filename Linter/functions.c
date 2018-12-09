@@ -141,6 +141,36 @@ int indent(int n, char * test){
 
 }
 
+int comments_header(char * test){
+
+    FILE* file = fopen(test, "r");
+
+    if(file == NULL){
+        printf("Impossible d'ouvrir le fichier");
+        return -1;
+    }
+
+    char c;
+
+    c = fgetc(file);
+    if(c == '/'){
+        c = fgetc(file);
+        if(c == '*'){
+            while(!feof(file)){
+                c = fgetc(file);
+                if(c == '*' && ((c = fgetc(file)) == '/')){
+                    return 0;
+                }
+            }
+            return 1;
+        }else{
+            return 1;
+        }
+    }else{
+        return 1;
+    }
+}
+
 int operators_spacing(char * test){
 
 
@@ -473,5 +503,41 @@ int operators_spacing(char * test){
     }while(!feof(file));
 
     return 0;
+
+}
+
+
+void read_function_parameters (int ** rules, char * LineRead, int index ){
+
+    int i = 0;
+
+    rules[index] = malloc(sizeof(int));
+    char * substring = malloc(sizeof(char) * 255);
+
+
+    for (int l=0; l< (strlen(LineRead) -1); l++){
+
+        if(LineRead[l] == '=' && LineRead[l+1] == ' '){
+            l+= 2;
+            do{
+                substring[i] = LineRead[l];
+                i++;
+                l++;
+            }while(LineRead[l] != '\n' );
+
+            substring[i] = '\0';
+        }
+
+    }
+
+    if((strcmp(substring, "off")) == 0){
+        rules[index][0] = 0;
+    }else if((strcmp(substring, "on")) == 0){
+        rules[index][0] = 1;
+    }else{
+        rules[index][0] = atoi(substring);
+    }
+
+    free(substring);
 
 }
