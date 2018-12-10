@@ -5,11 +5,14 @@ void openConfFile(){
     FILE* defaultFile = fopen(DEFAULT_CONF,"r");
 
     if(defaultFile == NULL){
-        printf("Can't open default conf file");
-        return NULL;
+        printf("Can't open default conf file\n");
     }
 
-    readConfFile(defaultFile);
+    int valueConf = readConfFile(defaultFile);
+    if(valueConf != 0){
+        printf("Error in configuration file\n");
+    }
+
 
 
 
@@ -29,7 +32,7 @@ int readConfFile(FILE * defaultFile){
 
 
     if(defaultFile == NULL){
-        return NULL;
+        return -1;
     }
 
     LineRead = malloc(sizeof(char)*255);
@@ -44,12 +47,10 @@ int readConfFile(FILE * defaultFile){
         //extends
 
         int i =0;
-        int counter = 0;
 
         if(strcmp(LineRead , "=extends\n") == 0){
 
             while(strcmp(LineRead, "\n") != 0 ){
-
 
                 fgets(LineRead, 255, defaultFile);
                 extend[i] = malloc(sizeof(char) * (strlen(LineRead) +1 ));
@@ -64,15 +65,10 @@ int readConfFile(FILE * defaultFile){
                         extend[i][j] = '\0';
                     }
                 }
-
                 i++;
                 counter_extend++;
 
             }
-
-
-
-
         }
 
 
@@ -197,13 +193,12 @@ int readConfFile(FILE * defaultFile){
                     index = 15;
                     read_function_parameters (rules, LineRead,index);
                     counter_rules++;
+                }else if(index == -1){
+                    printf("Rules doesn't exist");
+                    return -1;
                 }
-
             }
-
-
         }
-
 
         //excludedFiles
 
@@ -251,12 +246,101 @@ int readConfFile(FILE * defaultFile){
 
         }
 
-
     }while(!feof(defaultFile));
 
     printf(" recursive : %d\n", is_recursive);
     free(LineRead);
 
+
+    int is_call = call_function(extend, rules, excluded_files, counter_extend, counter_excluded, is_recursive);
+    if(is_call == 1){
+        printf("error");
+    }
+
     return 0;
 
 }
+
+int call_function(char ** extend, int ** rules, char ** excluded_files, int counter_extend, int counter_excluded, int is_recursive){
+    /*int i;
+    for(i=0; i<15; i++){
+        printf("%d   ", rules[i][0]);
+    }*/
+    int result;
+    if((rules[0][0]) == 1){
+         printf("array_bracket_eol\n");
+         result = array_bracket_eol("testfunction/array_bracket_eol.txt");
+         printf("%d\n", result);
+    }
+    if((rules[1][0]) == 1){
+         printf("operators_spacing\n");
+         result = operators_spacing("testfunction/operators_spacing.txt");
+         printf("%d\n", result);
+    }
+    if((rules[2][0]) == 1){
+         printf("comma_spacing\n");
+         result = comma_spacing("testfunction/comma_spacing.txt");
+         printf("%d\n", result);
+    }
+    if((rules[3][0]) > 1){
+         printf("indent\n");
+         result = indent(rules[3][0], "testfunction/indent.txt");
+         printf("%d\n", result);
+    }
+    if((rules[4][0]) == 1){
+         printf("comments_header\n");
+         result = comments_header("testfunction/comments_header.txt");
+         printf("%d\n", result);
+    }
+    if((rules[5][0]) > 1){
+         printf("max_line_numbers\n");
+         result = max_line_numbers(rules[5][0], "testfunction/max_line_numbers.txt");
+         printf("%d\n", result);
+    }
+    if((rules[6][0]) > 1){
+         printf("max_file_line_number\n");
+         result = max_file_line_number(rules[6][0], "testfunction/max_file_line_number.txt");
+         printf("%d\n", result);
+    }
+    /*if((rules[7][0]) == 1){
+         printf("no_trailing_spaces\n");
+         no_trailing_spaces("testfunction/no_trailing_spaces.txt");
+    }*/
+    if((rules[8][0]) == 1){
+         printf("no_multi_declaration\n");
+         result = no_multi_declaration("testfunction/no_multi_declaration.txt");
+         printf("%d\n", result);
+    }
+    /*if((rules[9][0]) == 1){
+         printf("unused_variable\n");
+         unused_variable("testfunction/unused_variable.txt");
+    }
+    if((rules[10][0]) == 1){
+         printf("undeclared_variable\n");
+         undeclared_variable("testfunction/undeclared_variable.txt");
+    }
+    if((rules[11][0]) == 1){
+         printf("no_prototype\n");
+         no_prototype("testfunction/no_prototype.txt");
+    }
+    if((rules[12][0]) == 1){
+         printf("unused_function\n");
+         unused_function("testfunction/unused_function.txt");
+    }
+    if((rules[13][0]) == 1){
+         printf("undeclared_function\n");
+         undeclared_function("testfunction/undeclared_function.txt");
+    }
+    if((rules[14][0]) == 1){
+         printf("variable_assignment_type\n");
+         variable_assignment_type("testfunction/variable_assignment_type.txt");
+    }
+    if((rules[15][0]) == 1){
+         printf("function_parameters_type\n");
+         function_parameters_type("testfunction/function_parameters_type.txt");
+    }*/
+    return 0;
+}
+
+
+

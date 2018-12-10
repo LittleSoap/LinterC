@@ -14,7 +14,6 @@ int max_file_line_number(int n, char * file_function){
     char * string = malloc(sizeof(char)*255);
 
     while (fgets(string, 255, file)){
-        printf("counter = %d\n", counter);
         counter++;
     }
 

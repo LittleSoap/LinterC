@@ -4,6 +4,7 @@
 void openConfFile();
 int readConfFile(FILE * defaultFile);
 void read_function_parameters (int ** rules, char * LineRead, int index);
+int call_function(char ** extend, int ** rules, char ** excluded_files, int counter_extend, int counter_excluded, int is_recursive);
 
 
 //Functions part 2
