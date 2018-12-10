@@ -1,0 +1,39 @@
+#include "header.h"
+
+
+int main(int argc){
+
+    //openConfFile();
+
+    int error = no_multi_declaration("main.c");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    printf("HELLO");
+    
+
+    return 0;
+}
