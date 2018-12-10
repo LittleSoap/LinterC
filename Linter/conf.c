@@ -268,48 +268,54 @@ int call_function(char ** extend, int ** rules, char ** excluded_files, int coun
     }*/
     int result;
     if((rules[0][0]) == 1){
-         printf("array_bracket_eol\n");
+         printf("array_bracket_eol :\n");
          result = array_bracket_eol("testfunction/array_bracket_eol.txt");
-         printf("%d\n", result);
+         if(result != 0){
+            printf("    L'accolade n'est pas en fin de ligne à la ligne : %d\n\n", result);
+         }
     }
     if((rules[1][0]) == 1){
-         printf("operators_spacing\n");
+         printf("operators_spacing :\n");
          result = operators_spacing("testfunction/operators_spacing.txt");
-         printf("%d\n", result);
+         printf("%d\n\n", result);
     }
     if((rules[2][0]) == 1){
-         printf("comma_spacing\n");
+         printf("comma_spacing :\n");
          result = comma_spacing("testfunction/comma_spacing.txt");
-         printf("%d\n", result);
+         printf("%d\n\n", result);
     }
     if((rules[3][0]) > 1){
-         printf("indent\n");
+         printf("indent :\n");
          result = indent(rules[3][0], "testfunction/indent.txt");
-         printf("%d\n", result);
+         printf("%d\n\n", result);
     }
     if((rules[4][0]) == 1){
-         printf("comments_header\n");
+         printf("comments_header :\n");
          result = comments_header("testfunction/comments_header.txt");
-         printf("%d\n", result);
+         printf("%d\n\n", result);
     }
     if((rules[5][0]) > 1){
-         printf("max_line_numbers\n");
+         printf("max_line_numbers :\n");
          result = max_line_numbers(rules[5][0], "testfunction/max_line_numbers.txt");
-         printf("%d\n", result);
+         if(result != 0){
+            printf("    Maximum character is reached for max_line_number.txt at line : %d\n\n", result);
+         }
     }
     if((rules[6][0]) > 1){
-         printf("max_file_line_number\n");
+         printf("max_file_line_number :\n");
          result = max_file_line_number(rules[6][0], "testfunction/max_file_line_number.txt");
-         printf("%d\n", result);
+         if(result == 1){
+            printf("    Too many line in file max_file_line_number.txt\n\n");
+         }
     }
     /*if((rules[7][0]) == 1){
          printf("no_trailing_spaces\n");
          no_trailing_spaces("testfunction/no_trailing_spaces.txt");
     }*/
     if((rules[8][0]) == 1){
-         printf("no_multi_declaration\n");
+         printf("no_multi_declaration :\n");
          result = no_multi_declaration("testfunction/no_multi_declaration.txt");
-         printf("%d\n", result);
+         printf("%d\n\n", result);
     }
     /*if((rules[9][0]) == 1){
          printf("unused_variable\n");

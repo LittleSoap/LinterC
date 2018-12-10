@@ -1,0 +1,12 @@
+#include "header.h"
+
+
+int main(int argc){
+
+    //openConfFile();
+
+    int error = no_multi_declaration("main.c");
+    printf("%d" , error);
+
+    return 0;
+}

@@ -38,14 +38,15 @@ int max_line_numbers(int n, char * file_function){
     }
 
     char * string = malloc(sizeof(char)*255);
+    int counter = 0;
 
     while (fgets(string, 255, file)){
 
-        if((strlen(string) -1) > n ){
-            printf("lenght : %d\n", strlen(string));
+        if((strlen(string)) > n ){
             free(string);
-            return 1;
+            return counter+1;
         }
+        counter++;
     }
     free(string);
     return 0;
@@ -66,7 +67,6 @@ int comma_spacing(char * file_function){
         if(feof(file)){
             break;
         }
-        printf("%c\n", c);
         if(c == ','){
             c = fgetc(file);
             if(c != ' '){
@@ -89,24 +89,23 @@ int array_bracket_eol(char *file_function){
     }
     char * string = malloc(sizeof(char) * 255);
 
+    int counter = 0;
+
     do {
 
         fgets(string, 255, file);
         int i;
+
         for(i = 0; i<(strlen(string)-1); i++)
         {
-
             if(string[i] == '{'){
 
                     if(string[i-1] != ')' && string[i-1] != '\n' && (string[i-1] != 'o')){
-                        printf("%c", string[i-1]);
-                        return 1;
+                        return counter;
                     }
-
             }
-
         }
-
+        counter++;
 
     }while(!feof(file));
 
