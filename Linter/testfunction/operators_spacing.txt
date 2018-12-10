@@ -3,13 +3,25 @@
 
 int main(int argc){
 
-    //openConfFile();
+    a +b
+    a - b
+    a / b
+    a * b
+    a = b
+    a % b
+    a ++ b
+    a += b
+    a -- b
+    a -= b
 
-    int a,b;
-    a = 0;
-    b = 1;
-    int error = no_multi_declaration("main.c");
-    printf("%d" , error);
-
-    return 0;
+    a == b
+    a *= b
+    a /= b
+    a %= b
+    a != b
+    a < b
+    a > b
+    a <= b
+    a >= b
+	
 }

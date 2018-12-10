@@ -38,13 +38,13 @@ int max_line_numbers(int n, char * file_function){
     }
 
     char * string = malloc(sizeof(char)*255);
-    int counter = 0;
+    int counter = 1;
 
     while (fgets(string, 255, file)){
 
         if((strlen(string)) > n ){
             free(string);
-            return counter+1;
+            return counter;
         }
         counter++;
     }
@@ -62,15 +62,20 @@ int comma_spacing(char * file_function){
         return -1;
     }
     char c;
+    int counter = 1;
+
     do {
         c = fgetc(file);
         if(feof(file)){
             break;
         }
+        if(c == '\n'){
+            counter++;
+        }
         if(c == ','){
             c = fgetc(file);
             if(c != ' '){
-                return 1;
+                return counter;
             }
         }
     }while(c);
@@ -121,6 +126,7 @@ int indent(int n, char * file_function){
         return -1;
     }
     char * string = malloc(sizeof(char) * 255);
+    int counter = 1;
 
     do {
         fgets(string, 255, file);
@@ -130,8 +136,9 @@ int indent(int n, char * file_function){
             i++;
         }
         if((i%n) != 0){
-            return 1;
+            return counter;
         }
+        counter++;
 
     }while(!feof(file));
 
@@ -171,7 +178,6 @@ int comments_header(char * file_function){
 
 int operators_spacing(char * file_function){
 
-
     FILE* file = fopen(file_function, "r");
 
     if(file == NULL){
@@ -180,324 +186,223 @@ int operators_spacing(char * file_function){
     }
     char * string = malloc(sizeof(char) * 255);
 
-    do {
+    int counter = 1;
 
+    do {
         fgets(string, 255, file);
         int i;
 
-        for(i = 0; i<(strlen(string)-1); i++)
-        {
-
+        for(i = 0; i<(strlen(string)-1); i++){
             switch(string[i]){
-
                 case '+':
-
                     //Case ++
                     if(string[i-1] == '+'){
-
                         if(string[i+1] != ' ' || string[i-2] != ' '){
                             return 0;
                         }
-
                     }
-
                     //Case ++
                     else if(string[i+1] == '+'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case +=
                     else if(string[i+1] == '='){
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
-
-
                 break;
-
                 case '-' :
-
                     //Case --
                     if(string[i-1] == '-'){
-
                         if(string[i+1] != ' ' || string[i-2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case --
                     else if(string[i+1] == '-'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case -=
                     else if(string[i+1] == '='){
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
-
-
                 break;
-
                 case '*' :
-
                     //case *=
                     if(string[i+1] == '='){
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }else{
 
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '/':
-
                     //case /=
                     if(string[i+1] == '='){
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }else{
 
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '%':
-
                     //case %=
                     if(string[i+1] == '='){
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }else{
 
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '=' :
-
                     //Case affectation and comparison
                     if(string[i-1] == '+' || string[i-1] == '-' || string[i-1] == '*' || string[i-1] == '/' || string[i-1] == '%' || string[i-1] == '<' || string[i-1] == '>' || string[i-1] == '!'){
                         if(string[i-2] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     //Case ==
                     else if(string[i-1] == '='){
 
                         if(string[i+1] != ' ' || string[i-2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case ==
                     else if(string[i+1] == '='){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '<' :
-
                     //Case <<
                     if(string[i+1] == '<'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     //Case <<
                     else if(string[i-1] == '<'){
-
                         if(string[i-2] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     //Case <=
                     if(string[i+1] == '='){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '>' :
-
                     //Case >>
                     if(string[i+1] == '>'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     //Case >>
                     else if(string[i-1] == '>'){
-
                         if(string[i-2] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
-
                     //Case >=
                     else if(string[i+1] == '='){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '!' :
-
                     //Case !=
                     if(string[i+1] == '='){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
                     }
-
                     else{
-
                         if(string[i-1] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
-
                 case '&':
-
                     //Case &&
                     if(string[i-1] == '&'){
-
                         if(string[i-2] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case &&
                     if(string[i+1] == '&'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
-
                 case '|':
-
                     //Case ||
                     if(string[i-1] == '|'){
-
                         if(string[i-2] != ' ' || string[i+1] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                     //Case ||
                     if(string[i+1] == '|'){
-
                         if(string[i-1] != ' ' || string[i+2] != ' '){
-                            return 1;
+                            return counter;
                         }
-
                     }
-
                 break;
             }
-
         }
-
-
+        counter++;
     }while(!feof(file));
 
     return 0;
@@ -513,9 +418,13 @@ int no_multi_declaration(char * file_function){
         return -1;
     }
     char c;
+    int counter = 1;
 
     c = fgetc(file);
     while(!feof(file)){
+        if(c == '\n'){
+            counter++;
+        }
         if(c != '('){
             //int
             if(c == 'i'){
@@ -528,7 +437,7 @@ int no_multi_declaration(char * file_function){
                             if(c == '('){
                                 break;
                             }else if(c == ','){
-                                return 1;
+                                return counter;
                             }else{
                                 c = fgetc(file);
                             }
@@ -549,7 +458,7 @@ int no_multi_declaration(char * file_function){
                                 if(c == '('){
                                     break;
                                 }else if(c == ','){
-                                    return 1;
+                                    return counter;
                                 }else{
                                     c = fgetc(file);
                                 }
@@ -573,7 +482,7 @@ int no_multi_declaration(char * file_function){
                                     if(c == '('){
                                         break;
                                     }else if(c == ','){
-                                        return 1;
+                                        return counter;
                                     }else{
                                         c = fgetc(file);
                                     }
@@ -600,7 +509,7 @@ int no_multi_declaration(char * file_function){
                                         if(c == '('){
                                             break;
                                         }else if(c == ','){
-                                            return 1;
+                                            return counter;
                                         }else{
                                             c = fgetc(file);
                                         }
@@ -626,7 +535,7 @@ int no_multi_declaration(char * file_function){
                                     if(c == '('){
                                         break;
                                     }else if(c == ','){
-                                        return 1;
+                                        return counter;
                                     }else{
                                         c = fgetc(file);
                                     }
@@ -657,7 +566,7 @@ int no_multi_declaration(char * file_function){
                                                 if(c == '('){
                                                     break;
                                                 }else if(c == ','){
-                                                    return 1;
+                                                    return counter;
                                                 }else{
                                                     c = fgetc(file);
                                                 }
@@ -683,7 +592,7 @@ int no_multi_declaration(char * file_function){
                                 if(c == '('){
                                     break;
                                 }else if(c == ','){
-                                    return 1;
+                                    return counter;
                                 }else{
                                     c = fgetc(file);
                                 }
@@ -719,7 +628,6 @@ void read_function_parameters (int ** rules, char * LineRead, int index ){
 
             substring[i] = '\0';
         }
-
     }
 
     if((strcmp(substring, "off")) == 0){

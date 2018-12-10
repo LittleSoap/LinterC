@@ -12,10 +12,10 @@ test2.c
 - array_bracket_eol = on
 - operators_spacing = on
 - comma_spacing = on
-- indent = on
+- indent = 4
 - comments_header = on
 - max_line_numbers = 20
-- max_file_line_number = 5
+- max_file_line_number = 2
 - no_trailing_spaces = on
 - no_multi_declaration = on
 - unused_variable = off

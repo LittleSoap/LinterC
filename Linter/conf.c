@@ -30,7 +30,6 @@ int readConfFile(FILE * defaultFile){
     int counter_excluded = 0;
     int counter_rules = 0;
 
-
     if(defaultFile == NULL){
         return -1;
     }
@@ -67,49 +66,37 @@ int readConfFile(FILE * defaultFile){
                 }
                 i++;
                 counter_extend++;
-
             }
         }
 
-
         //rules
-
         i = 0;
         int index = -1;
 
         /*
-
-            0 : array-bracket-eol
-            1 : operators-spacing
-            2 : comma-spacing
-            3 : indent
-            4 : comments-header
-            5 : max-line-numbers
-            6 : max-file-line-numbers
-            7 : no-trailing-spaces
-            8 : no-multi-declaration
-            9 : unused-variable
-            10 : undeclared-variable
-            11 : no-prototype
-            12 : unused-function
-            13 : undeclared-function
-            14 : variable-assignment-type
-            15 : function-parameters-type
-
-
+        0 : array-bracket-eol
+        1 : operators-spacing
+        2 : comma-spacing
+        3 : indent
+        4 : comments-header
+        5 : max-line-numbers
+        6 : max-file-line-numbers
+        7 : no-trailing-spaces
+        8 : no-multi-declaration
+        9 : unused-variable
+        10 : undeclared-variable
+        11 : no-prototype
+        12 : unused-function
+        13 : undeclared-function
+        14 : variable-assignment-type
+        15 : function-parameters-type
         */
-
         if(strcmp(LineRead , "=rules\n") == 0){
-
-                counter_rules =0;
-
+            counter_rules =0;
             /*
-
             1) - nom_fonction
             2) Dans rules on se place à l'indice de la fonction correspondante
             3) fseek : on se place sur le procahin =
-            4)
-
             */
 
             while(strcmp(LineRead, "\n") != 0 ){
@@ -209,7 +196,6 @@ int readConfFile(FILE * defaultFile){
 
             while(strcmp(LineRead, "\n") != 0 ){
 
-
                 fgets(LineRead, 255, defaultFile);
                 excluded_files[i] = malloc(sizeof(char) * (strlen(LineRead) +1 ));
 
@@ -227,11 +213,8 @@ int readConfFile(FILE * defaultFile){
                 i++;
                 counter_excluded++;
             }
-
         }
-
         //recursive
-
         if(strcmp(LineRead , "=recursive\n") == 0){
 
             fgets(LineRead, 255, defaultFile);
@@ -248,9 +231,7 @@ int readConfFile(FILE * defaultFile){
 
     }while(!feof(defaultFile));
 
-    printf(" recursive : %d\n", is_recursive);
     free(LineRead);
-
 
     int is_call = call_function(extend, rules, excluded_files, counter_extend, counter_excluded, is_recursive);
     if(is_call == 1){
@@ -262,49 +243,53 @@ int readConfFile(FILE * defaultFile){
 }
 
 int call_function(char ** extend, int ** rules, char ** excluded_files, int counter_extend, int counter_excluded, int is_recursive){
-    /*int i;
-    for(i=0; i<15; i++){
-        printf("%d   ", rules[i][0]);
-    }*/
     int result;
     if((rules[0][0]) == 1){
-         printf("array_bracket_eol :\n");
          result = array_bracket_eol("testfunction/array_bracket_eol.txt");
          if(result != 0){
-            printf("    L'accolade n'est pas en fin de ligne à la ligne : %d\n\n", result);
+            printf("array_bracket_eol :\n");
+            printf("    Bracket is not at the end of line at line : %d - array_bracket_eol.txt\n\n", result);
          }
     }
     if((rules[1][0]) == 1){
-         printf("operators_spacing :\n");
          result = operators_spacing("testfunction/operators_spacing.txt");
-         printf("%d\n\n", result);
+         if(result != 0){
+            printf("operators_spacing :\n");
+            printf("    A space is missing at line : %d - operators_spacing.txt\n\n", result);
+         }
     }
     if((rules[2][0]) == 1){
-         printf("comma_spacing :\n");
          result = comma_spacing("testfunction/comma_spacing.txt");
-         printf("%d\n\n", result);
+         if(result != 0){
+            printf("comma_spacing :\n");
+            printf("    A space is missing after comma at line : %d - comma_spacing.txt\n\n", result);
+         }
     }
-    if((rules[3][0]) > 1){
-         printf("indent :\n");
+    if((rules[3][0]) >= 1){
          result = indent(rules[3][0], "testfunction/indent.txt");
-         printf("%d\n\n", result);
+         if(result != 0){
+            printf("indent :\n");
+            printf("    There is a bad indentation at line : %d - indent.txt\n\n", result);
+         }
     }
     if((rules[4][0]) == 1){
-         printf("comments_header :\n");
          result = comments_header("testfunction/comments_header.txt");
-         printf("%d\n\n", result);
+         if(result == 1){
+            printf("comments_header :\n");
+            printf("    There is not multi comments in comments_header.txt");
+         }
     }
     if((rules[5][0]) > 1){
-         printf("max_line_numbers :\n");
          result = max_line_numbers(rules[5][0], "testfunction/max_line_numbers.txt");
          if(result != 0){
+            printf("max_line_numbers :\n");
             printf("    Maximum character is reached for max_line_number.txt at line : %d\n\n", result);
          }
     }
     if((rules[6][0]) > 1){
-         printf("max_file_line_number :\n");
          result = max_file_line_number(rules[6][0], "testfunction/max_file_line_number.txt");
          if(result == 1){
+            printf("max_file_line_number :\n");
             printf("    Too many line in file max_file_line_number.txt\n\n");
          }
     }
@@ -313,9 +298,11 @@ int call_function(char ** extend, int ** rules, char ** excluded_files, int coun
          no_trailing_spaces("testfunction/no_trailing_spaces.txt");
     }*/
     if((rules[8][0]) == 1){
-         printf("no_multi_declaration :\n");
          result = no_multi_declaration("testfunction/no_multi_declaration.txt");
-         printf("%d\n\n", result);
+         if(result != 0){
+         printf("no_multi_declaration :\n");
+            printf("    There is a multi declaration at line : %d - no_multi_declaration.txt\n\n", result);
+         }
     }
     /*if((rules[9][0]) == 1){
          printf("unused_variable\n");

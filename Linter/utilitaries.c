@@ -1,15 +1,15 @@
 #include "header.h"
 
-char * my_flush(char * test){
+char * my_flush(char * tab){
 
     int i;
-    for(i =0; i<(strlen(test)-1); i++){
-        if(test[i] == '\n'){
-            test[i] = '\0';
+    for(i =0; i<(strlen(tab)-1); i++){
+        if(tab[i] == '\n'){
+            tab[i] = '\0';
         }
     }
 
-    return test;
+    return tab;
 
 }
 
