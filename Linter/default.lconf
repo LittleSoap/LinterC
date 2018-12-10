@@ -27,4 +27,4 @@ test2.c
 - function_parameters_type = on
 
 =recursive
-f
+true
