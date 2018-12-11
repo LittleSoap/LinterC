@@ -12,10 +12,6 @@ void openConfFile(){
     if(valueConf != 0){
         printf("Error in configuration file\n");
     }
-
-
-
-
 }
 
 
@@ -23,7 +19,7 @@ int readConfFile(FILE * defaultFile){
 
     char ** extend;
     int ** rules;
-    int is_recursive;
+    int is_recursive = 0;
     char ** excluded_files;
     char * LineRead;
     int counter_extend =0;
@@ -248,49 +244,70 @@ int call_function(char ** extend, int ** rules, char ** excluded_files, int coun
          result = array_bracket_eol("testfunction/array_bracket_eol.txt");
          if(result != 0){
             printf("array_bracket_eol :\n");
-            printf("    Bracket is not at the end of line at line : %d - array_bracket_eol.txt\n\n", result);
+            printf("    Bracket is not at the end of line at line : %d - 'array_bracket_eol.txt'\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : array_bracket_eol.txt");
          }
     }
     if((rules[1][0]) == 1){
          result = operators_spacing("testfunction/operators_spacing.txt");
          if(result != 0){
             printf("operators_spacing :\n");
-            printf("    A space is missing at line : %d - operators_spacing.txt\n\n", result);
+            printf("    A space is missing at line : %d - 'operators_spacing.txt'\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : operators_spacing.txt");
          }
     }
     if((rules[2][0]) == 1){
          result = comma_spacing("testfunction/comma_spacing.txt");
          if(result != 0){
             printf("comma_spacing :\n");
-            printf("    A space is missing after comma at line : %d - comma_spacing.txt\n\n", result);
+            printf("    A space is missing after comma at line : %d - 'comma_spacing.txt'\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : comma_spacing.txt");
          }
     }
     if((rules[3][0]) >= 1){
          result = indent(rules[3][0], "testfunction/indent.txt");
          if(result != 0){
             printf("indent :\n");
-            printf("    There is a bad indentation at line : %d - indent.txt\n\n", result);
+            printf("    There is a bad indentation at line : %d - 'indent.txt'\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : indent.txt");
          }
     }
     if((rules[4][0]) == 1){
          result = comments_header("testfunction/comments_header.txt");
          if(result == 1){
             printf("comments_header :\n");
-            printf("    There is not multi comments in comments_header.txt");
+            printf("    There is not multi comments in 'comments_header.txt'");
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : comments_header.txt");
          }
     }
     if((rules[5][0]) > 1){
          result = max_line_numbers(rules[5][0], "testfunction/max_line_numbers.txt");
          if(result != 0){
             printf("max_line_numbers :\n");
-            printf("    Maximum character is reached for max_line_number.txt at line : %d\n\n", result);
+            printf("    Maximum character is reached for 'max_line_number.txt' at line : %d\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : max_line_numbers.txt");
          }
     }
     if((rules[6][0]) > 1){
          result = max_file_line_number(rules[6][0], "testfunction/max_file_line_number.txt");
          if(result == 1){
             printf("max_file_line_number :\n");
-            printf("    Too many line in file max_file_line_number.txt\n\n");
+            printf("    Too many line in file 'max_file_line_number.txt'\n\n");
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : max_file_line_number.txt");
          }
     }
     /*if((rules[7][0]) == 1){
@@ -301,7 +318,10 @@ int call_function(char ** extend, int ** rules, char ** excluded_files, int coun
          result = no_multi_declaration("testfunction/no_multi_declaration.txt");
          if(result != 0){
          printf("no_multi_declaration :\n");
-            printf("    There is a multi declaration at line : %d - no_multi_declaration.txt\n\n", result);
+            printf("    There is a multi declaration at line : %d - 'no_multi_declaration.txt'\n\n", result);
+         }
+         if(result == -1){
+            printf("    Impossible d'ouvrir le fichier : no_multi_declaration.txt");
          }
     }
     /*if((rules[9][0]) == 1){
