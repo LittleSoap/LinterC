@@ -22,4 +22,3 @@ int no_multi_declaration(char * test);
 //Utilitaries
 void printArray2D(char ** tab, int counter);
 char * my_flush(char * test);
-
